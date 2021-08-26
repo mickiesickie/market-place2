@@ -1,12 +1,5 @@
-import http from '../http';
+import getproducts from './getProducts';
+import postproduct from './postProduct';
 
-const InventoryEndpoint = {
-  getProducts: () => {
-    return http.get('inventories/products').catch(error => []);
-  },
-  createProduct: data => {
-    return http.post('inventories/products/create', data).catch(error => []);
-  }
-};
-
-export default InventoryEndpoint;
+export const getProducts = getproducts;
+export const postProduct = postproduct;

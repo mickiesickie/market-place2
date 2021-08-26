@@ -25,31 +25,33 @@ const HttpHelper = {
     const headers = buildHeaders();
 
     return fetch(`${apiUrl}/${path}`, {
-        method: 'POST',
-        headers,
-        mode: 'cors',
-        credentials: 'include',
-        body: JSON.stringify(body)
-    }).then(res => res.json()).then(response => {
-      if (typeof response === 'object' && !Array.isArray(response)) {
-        if (response.statusCode === 401) {
-          store.dispatch(setToken(null));
+      method: 'POST',
+      headers,
+      mode: 'cors',
+      credentials: 'include',
+      body: JSON.stringify(body)
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        if (typeof response === 'object' && !Array.isArray(response)) {
+          if (response.statusCode === 401) {
+            store.dispatch(setToken(null));
+          }
         }
-      }
 
-      return response;
-    });
+        return response;
+      });
   },
   get: (path) => {
     const headers = buildHeaders();
 
     return fetch(`${apiUrl}/${path}`, {
-        method: 'GET',
-        headers,
-        mode: 'cors',
-        credentials: 'include'
-    }).then(res => res.json());
-  },
+      method: 'GET',
+      headers,
+      mode: 'cors',
+      credentials: 'include'
+    }).then((res) => res.json());
+  }
 };
 
 export default HttpHelper;

@@ -7,7 +7,7 @@ const theme = createMuiTheme({
         backdropFilter: 'blur(10px)'
       }
     }
-  },
+  }
 });
 
 export default theme;

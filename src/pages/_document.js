@@ -10,11 +10,11 @@ class CustomDocument extends Document {
     return (
       <Html>
         <Head>
-          <meta charSet="utf-8" />
-          <meta name="theme-color" content={theme.palette.primary.main} />
+          <meta charSet='utf-8' />
+          <meta name='theme-color' content={theme.palette.primary.main} />
           <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons"
+            rel='stylesheet'
+            href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons'
           />
           <style jsx global>
             {`
@@ -41,17 +41,17 @@ class CustomDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    )
+    );
   }
 }
 
-CustomDocument.getInitialProps = async ctx => {
-  const sheets = new ServerStyleSheets()
-  const originalRenderPage = ctx.renderPage
+CustomDocument.getInitialProps = async (ctx) => {
+  const sheets = new ServerStyleSheets();
+  const originalRenderPage = ctx.renderPage;
 
   ctx.renderPage = () =>
     originalRenderPage({
-      enhanceApp: App => props => sheets.collect(<App {...props} />)
+      enhanceApp: (App) => (props) => sheets.collect(<App {...props} />)
     });
 
   const initialProps = await Document.getInitialProps(ctx);
@@ -59,12 +59,12 @@ CustomDocument.getInitialProps = async ctx => {
   return {
     ...initialProps,
     styles: [
-      <React.Fragment key="styles">
+      <React.Fragment key='styles'>
         {initialProps.styles}
         {sheets.getStyleElement()}
       </React.Fragment>
     ]
-  }
-}
+  };
+};
 
 export default CustomDocument;

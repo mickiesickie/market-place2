@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 
-import sessionReducer  from '../session';
+import sessionReducer from '../session';
 
 const reducers = combineReducers({
   session: sessionReducer

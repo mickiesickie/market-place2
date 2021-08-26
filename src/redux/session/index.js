@@ -12,8 +12,8 @@ export const sessionSlice = createSlice({
     removeToken: (state) => {
       state.token = null;
     }
-  },
-})
+  }
+});
 
 export const { setToken, removeToken } = sessionSlice.actions;
 

@@ -12,8 +12,8 @@ import Form from '../form';
 
 const useStyles = makeStyles({
   table: {
-    minWidth: 650,
-  },
+    minWidth: 650
+  }
 });
 
 export default function List({ products = [], onAfterSave = () => {} }) {
@@ -21,7 +21,14 @@ export default function List({ products = [], onAfterSave = () => {} }) {
 
   return (
     <React.Fragment>
-      <Box p={2} display="flex" width="100%" flexDirection="row" justifyContent="flex-end" alignItems="center">
+      <Box
+        p={2}
+        display='flex'
+        width='100%'
+        flexDirection='row'
+        justifyContent='flex-end'
+        alignItems='center'
+      >
         <Form onAfterSave={onAfterSave} />
       </Box>
       <TableContainer component={Paper}>
@@ -29,18 +36,20 @@ export default function List({ products = [], onAfterSave = () => {} }) {
           <TableHead>
             <TableRow>
               <TableCell>Nombre del producto</TableCell>
-              <TableCell align="right">SKU</TableCell>
-              <TableCell align="right">Cantidad</TableCell>
-              <TableCell align="right">Precio</TableCell>
+              <TableCell align='right'>SKU</TableCell>
+              <TableCell align='right'>Cantidad</TableCell>
+              <TableCell align='right'>Precio</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {products.map((product) => (
               <TableRow key={product.name}>
-                <TableCell component="th" scope="row">{product.name}</TableCell>
-                <TableCell align="right">{product.sku}</TableCell>
-                <TableCell align="right">{product.quantity}</TableCell>
-                <TableCell align="right">{product.price}</TableCell>
+                <TableCell component='th' scope='row'>
+                  {product.name}
+                </TableCell>
+                <TableCell align='right'>{product.sku}</TableCell>
+                <TableCell align='right'>{product.quantity}</TableCell>
+                <TableCell align='right'>{product.price}</TableCell>
               </TableRow>
             ))}
           </TableBody>

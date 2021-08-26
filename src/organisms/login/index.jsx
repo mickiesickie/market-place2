@@ -1,14 +1,18 @@
-import React from 'react';
+import React , { useEffect ,useState } from 'react';
+import {
+  Button,
+  Box,
+  Grid,
+  TextField
+}from '@material-ui/core';
+import { AccountCircle as  AccountCircleIcon}from '@material-ui/icons';
+import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import Modal from '../../molecules/modal';
+
+import Modal from '../../components/modal';
 import AuthApi from '../../api/auth';
 import { setToken } from '../../redux/session';
+import useStyles from './styles';
 
 const initialFormState = {
   email: '',
@@ -24,25 +28,23 @@ const initialErrorsState = {
 
 const emailRegexp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 
-export default function Login({ children }) {
-  const [open, setOpen] = React.useState(false);
-  const [isCreateAccount, setCreateAccount] = React.useState(false);
-  const [errors, setErrors] = React.useState(initialErrorsState);
-  const [errorMessage, setErrorMessage] = React.useState(null);
-  const [formData, setFormData] = React.useState(initialFormState);
+const Login = ({ children })  => {
+  const [open, setOpen] = useState(false);
+  const [isCreateAccount, setCreateAccount] = useState(false);
+  const [errors, setErrors] = useState(initialErrorsState);
+  const [errorMessage, setErrorMessage] =useState(null);
+  const [formData, setFormData] = useState(initialFormState);
+  const classes = useStyles();
+  const title = !isCreateAccount ? 'Inicio de sesión' : 'Crear cuenta';
 
+  let childrenCloned = null;
   const dispatch = useDispatch();
 
-  React.useEffect(() => {
+
+  useEffect(() => {
     const errors = Object.assign({}, errors);
 
-    if (
-      isCreateAccount
-      &&
-      formData.password
-      &&
-      formData.confirmPassword
-     ) {
+    if (isCreateAccount && formData.password && formData.confirmPassword) {
       if (formData.password !== formData.confirmPassword) {
         errors.confirmPassword = 'La contraseña no coincide.';
       } else {
@@ -64,27 +66,24 @@ export default function Login({ children }) {
   }, [formData]);
 
   const onOpen = () => setOpen(true);
+
   const onClose = () => {
     setOpen(false);
     setCreateAccount(false);
     setFormData(initialFormState);
     setErrors(initialErrorsState);
-  }
+  };
 
   const handleCreateAccount = async () => {
     if (!isCreateAccount) {
       setCreateAccount(true);
-
       return;
     }
-
     const response = await AuthApi.create(formData.email, formData.password);
-
     if (response.error) {
       setErrorMessage(response.error);
       return;
     }
-
     dispatch(setToken(response.accessToken));
   };
 
@@ -94,76 +93,62 @@ export default function Login({ children }) {
     }
 
     const response = await AuthApi.login(formData.email, formData.password);
-
     if (response.error) {
       setErrorMessage(response.error);
       return;
     }
-
     dispatch(setToken(response.accessToken));
   };
 
-  const handleChange = field => {
+  const handleChange = (field) => {
     return (e) => {
       const newFormData = Object.assign({}, formData, {
         [field]: e.target.value
       });
-
       setFormData(newFormData);
     };
-  }
+  };
 
-  const title = !isCreateAccount ? 'Inicio de sesión' : 'Crear cuenta';
-
-  let childrenCloned = null;
-
-  if (React.Children.count(children) === 1) {
-    childrenCloned = React.cloneElement(children, { onClick: onOpen });
-  }
 
   return (
-    <React.Fragment>
+    <>
       {React.Children.count(children) === 0 && (
-        <Button
-          color="inherit"
-          startIcon={<AccountCircleIcon />}
-          onClick={onOpen}
-        >
+        <Button color='inherit' startIcon={<AccountCircleIcon />} onClick={onOpen}>
           Iniciar sesión
         </Button>
       )}
 
       {childrenCloned}
 
-      <Modal open={open} title={title} onClose={onClose} size="sm">
-        <Box height="70%" section="content">
+      <Modal open={open} title={title} onClose={onClose} size='sm'>
+        <Box height='70%' section='content'>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                label="Correo eléctronico"
-                variant="outlined"
-                size="medium"
-                name="email"
+                label='Correo eléctronico'
+                variant='outlined'
+                size='medium'
+                name='email'
                 fullWidth
                 helperText={errors['email']}
                 error={Boolean(errors['email'])}
                 onChange={handleChange('email')}
-                type="email"
+                type='email'
                 value={formData.email}
               />
             </Grid>
 
             <Grid item xs={12}>
               <TextField
-                label="Contraseña"
-                variant="outlined"
-                size="medium"
-                name="password"
+                label='Contraseña'
+                variant='outlined'
+                size='medium'
+                name='password'
                 fullWidth
                 helperText={errors['password']}
                 error={Boolean(errors['password'])}
                 onChange={handleChange('password')}
-                type="password"
+                type='password'
                 value={formData.password}
               />
             </Grid>
@@ -171,15 +156,15 @@ export default function Login({ children }) {
             {isCreateAccount && (
               <Grid item xs={12}>
                 <TextField
-                  label="Confirmar contraseña"
-                  variant="outlined"
-                  size="medium"
-                  name="password"
+                  label='Confirmar contraseña'
+                  variant='outlined'
+                  size='medium'
+                  name='password'
                   fullWidth
                   helperText={errors['confirmPassword']}
                   error={Boolean(errors['confirmPassword'])}
                   onChange={handleChange('confirmPassword')}
-                  type="password"
+                  type='password'
                   value={formData.confirmPassword}
                 />
               </Grid>
@@ -191,11 +176,11 @@ export default function Login({ children }) {
 
             <Grid item xs={12}>
               {!isCreateAccount && (
-                 <Box display="flex" justifyContent="center" flexDirection="column">
+                <Box className={classes.boxUI}>
                   <Button
-                    size="large"
-                    variant="contained"
-                    color="primary"
+                    size='large'
+                    variant='contained'
+                    color='primary'
                     fullWidth
                     onClick={handleLogin}
                   >
@@ -204,10 +189,10 @@ export default function Login({ children }) {
                 </Box>
               )}
 
-              <Box mt={2} display="flex" justifyContent="center" flexDirection="column">
+              <Box mt={2} className={classes.boxUI}>
                 <Button
                   variant={isCreateAccount ? 'contained' : 'outlined'}
-                  color="primary"
+                  color='primary'
                   fullWidth
                   onClick={handleCreateAccount}
                 >
@@ -216,12 +201,13 @@ export default function Login({ children }) {
               </Box>
 
               {isCreateAccount && (
-                 <Box mt={2} display="flex" justifyContent="center" flexDirection="column">
+                <Box mt={2} className={classes.boxUI}>
                   <Button
-                    size="large"
-                    variant="text"
-                    type="submit"
-                    color="primary"
+                    size='large'
+                    variant='text'
+                    type='submit'
+                    color='primary'
+                    fullWidth
                     onClick={() => setCreateAccount(false)}
                   >
                     Regresar
@@ -232,6 +218,11 @@ export default function Login({ children }) {
           </Grid>
         </Box>
       </Modal>
-    </React.Fragment>
+    </>
   );
 }
+
+Login.propTypes = {
+  children: PropTypes.object
+};
+export default Login;

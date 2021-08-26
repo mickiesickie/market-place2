@@ -9,15 +9,15 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Grid from '../../molecules/grid';
-import Search from '../../molecules/search';
+import Grid from '../../components/grid';
+import Search from '../../components/search';
 import ProviderApi from '../../api/providers';
 import UserApi from '../../api/users';
 import useStyles from './styles';
 
 export default function Administrator() {
   const classes = useStyles();
-  const hasToken = useSelector(state => Boolean(state.session.token));
+  const hasToken = useSelector((state) => Boolean(state.session.token));
 
   const [products, setProducts] = React.useState([]);
   const [users, setUsers] = React.useState([]);
@@ -64,7 +64,7 @@ export default function Administrator() {
   return (
     <Box p={2} className={classes.root}>
       <Paper className={classes.filters}>
-        <Typography variant="subtitle1" gutterBottom>
+        <Typography variant='subtitle1' gutterBottom>
           Filtros por provedores
         </Typography>
 
@@ -76,7 +76,7 @@ export default function Administrator() {
               <ListItem key={user.id} role={undefined} dense button onClick={handleToggle(user.id)}>
                 <ListItemIcon>
                   <Checkbox
-                    edge="start"
+                    edge='start'
                     checked={checked.indexOf(user.id) !== -1}
                     tabIndex={-1}
                     disableRipple

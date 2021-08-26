@@ -7,13 +7,7 @@ import Title from './title';
 import Content from './content';
 import Actions from './actions';
 
-const Modal = ({
-  children,
-  open = false,
-  title,
-  onClose = () => {},
-  maxWidth = 'sm'
-}) => {
+const Modal = ({ children, open = false, title, onClose = () => {}, maxWidth = 'sm' }) => {
   const childrenArray = React.Children.toArray(children);
 
   const contentChildren = childrenArray.filter((child, i) => child.props.section === 'content');
@@ -22,22 +16,16 @@ const Modal = ({
   return (
     <Dialog
       onClose={onClose}
-      aria-labelledby="dialog-title"
+      aria-labelledby='dialog-title'
       open={open}
       maxWidth={maxWidth}
       fullWidth
     >
-      <Title onClose={onClose}>
-        {title}
-      </Title>
+      <Title onClose={onClose}>{title}</Title>
 
-      <Content dividers>
-        {contentChildren}
-      </Content>
+      <Content dividers>{contentChildren}</Content>
 
-      <Actions>
-        {actionsChildren}
-      </Actions>
+      <Actions>{actionsChildren}</Actions>
     </Dialog>
   );
 };

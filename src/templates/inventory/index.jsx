@@ -5,7 +5,7 @@ import List from './list';
 import InventoryApi from '../../api/inventories';
 
 export default function Inventory() {
-  const hasToken = useSelector(state => Boolean(state.session.token));
+  const hasToken = useSelector((state) => Boolean(state.session.token));
 
   const [products, setProducts] = React.useState([]);
 
@@ -25,8 +25,8 @@ export default function Inventory() {
 
   return (
     <React.Fragment>
-      {(!hasToken || products.length === 0) && (<Empty onAfterSave={onAfterSave} />)}
-      {hasToken && products.length > 0 && (<List onAfterSave={onAfterSave} products={products} />)}
+      {(!hasToken || products.length === 0) && <Empty onAfterSave={onAfterSave} />}
+      {hasToken && products.length > 0 && <List onAfterSave={onAfterSave} products={products} />}
     </React.Fragment>
   );
 }

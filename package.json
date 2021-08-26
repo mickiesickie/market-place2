@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "prettier": "prettier --write ."
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
@@ -19,5 +20,8 @@
     "react-redux": "^7.2.4",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "prettier": "^2.0.5"
   }
 }

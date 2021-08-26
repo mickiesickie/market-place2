@@ -12,26 +12,24 @@ import Form from '../form';
 
 export default function Empty({ onAfterSave = () => {} }) {
   const classes = useStyles();
-  const hasToken = useSelector(state => Boolean(state.session.token));
+  const hasToken = useSelector((state) => Boolean(state.session.token));
 
   return (
     <div className={classes.container}>
       <Card className={classes.root}>
         <div className={classes.details}>
           <CardContent className={classes.content}>
-            <Typography component="h5" variant="h5">
+            <Typography component='h5' variant='h5'>
               Crea tu producto
             </Typography>
-            <Typography variant="subtitle1" color="textSecondary">
-              Organiza  de manera profesional tu inventario
+            <Typography variant='subtitle1' color='textSecondary'>
+              Organiza de manera profesional tu inventario
             </Typography>
 
-            <Box display="flex" width="100%" justifyContent="space-around" alignItems="center">
-                <Link href="#">
-                  Conoce más
-                </Link>
+            <Box display='flex' width='100%' justifyContent='space-around' alignItems='center'>
+              <Link href='#'>Conoce más</Link>
 
-                {hasToken && (<Form onAfterSave={onAfterSave} />)}
+              {hasToken && <Form onAfterSave={onAfterSave} />}
             </Box>
           </CardContent>
         </div>
@@ -39,9 +37,7 @@ export default function Empty({ onAfterSave = () => {} }) {
 
       {!hasToken && (
         <Login>
-          <Link>
-            Inicia sesión para poder ver tu inventario
-          </Link>
+          <Link>Inicia sesión para poder ver tu inventario</Link>
         </Login>
       )}
     </div>

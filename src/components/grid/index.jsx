@@ -5,22 +5,22 @@ import Typography from '@material-ui/core/Typography';
 import useStyles from './styles';
 
 export default function Grid({ products = [] }) {
-   const classes = useStyles();
+  const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      {products.map(product => (
+      {products.map((product) => (
         <Paper key={product.id} elevation={3}>
           <Paper elevation={1} className={classes.productImage} />
-          <Typography variant="h6" gutterBottom>
+          <Typography variant='h6' gutterBottom>
             {product.name}
           </Typography>
 
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant='subtitle1' gutterBottom>
             {product.sku}
           </Typography>
 
-          <Typography variant="subtitle1" gutterBottom>
+          <Typography variant='subtitle1' gutterBottom>
             $ {product.price}
           </Typography>
         </Paper>

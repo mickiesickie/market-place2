@@ -8,18 +8,14 @@ import useStyles from './styles';
 export default function Search({ onSearch = () => {} }) {
   const classes = useStyles();
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     onSearch(e.target.value);
-  }
+  };
 
   return (
     <Paper className={classes.root}>
-      <InputBase
-        className={classes.input}
-        placeholder="Buscar"
-        onChange={handleChange}
-      />
-      <IconButton type="submit" className={classes.iconButton}>
+      <InputBase className={classes.input} placeholder='Buscar' onChange={handleChange} />
+      <IconButton type='submit' className={classes.iconButton}>
         <SearchIcon />
       </IconButton>
     </Paper>

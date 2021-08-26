@@ -10,13 +10,13 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center'
   },
   main: {
-  	padding: '1rem',
+    padding: '1rem',
     width: '100%',
-		flex: 1,
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		alignItems: 'center',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     paddingLeft: 240,
     paddingTop: 64,
     paddingRight: 0,
@@ -24,15 +24,15 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: '100%',
-    height: 'calc(100vh - 180px)',
+    height: 'calc(100vh - 180px)'
   },
   footer: {
-  	width: '100%',
-		height: '100px',
-		borderTop: '1px solid #eaeaea',
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center'
+    width: '100%',
+    height: '100px',
+    borderTop: '1px solid #eaeaea',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));
 
